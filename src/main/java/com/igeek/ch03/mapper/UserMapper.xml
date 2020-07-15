@@ -31,4 +31,12 @@
         insert into user(username,sex,birthday,address) values(#{username},#{sex},#{birthday},#{address})
     </insert>
 
+    <!--    删除用户信息-parameterType类型是pojo类型时，要求#{key}中的key必须与pojo中的属性名称一致 -->
+    <update id="updateUser" parameterType="User">
+        update user set username=#{username},birthday=#{birthday},sex=#{sex},address=# {address} where id = #{id}
+    </update>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser" parameterType="int"> delete from user where id = #{id} </delete>
 </mapper>
+

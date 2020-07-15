@@ -43,13 +43,13 @@ public class UserMapperTest {
     }
 
     @Test
-    public void findByName(){
+    public void findByName() {
         //创建会话对象
         SqlSession sqlSession = factory.openSession();
         //获得代理对象
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<User> list = userMapper.findByName("明");
-        for(User user : list){
+        for (User user : list) {
             System.out.println(user);
         }
         //关闭资源
@@ -67,7 +67,7 @@ public class UserMapperTest {
         String str = "2019-09-09";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(str);
-        User user = new User("马汉","1",date,"江苏无锡");
+        User user = new User("马汉", "1", date, "江苏无锡");
 
         //执行插入操作
         userMapper.insert(user);
@@ -76,5 +76,25 @@ public class UserMapperTest {
         sqlSession.commit();
         //关闭资源
         sqlSession.close();
+    }
+
+    @Test
+    public void updateUser() {
+        SqlSession sqlSesison = factory.openSession();
+        UserMapper userMapper = sqlSesison.getMapper(UserMapper.class);
+        User user = userMapper.findOne(29);
+        user.setUsername("李四");
+        userMapper.updateUser(user);
+        sqlSesison.commit();
+        sqlSesison.close();
+    }
+
+    @Test
+    public void deleteUser() {
+        SqlSession sqlSesison = factory.openSession();
+        UserMapper userMapper = sqlSesison.getMapper(UserMapper.class);
+        userMapper.deleteUser(29);
+        sqlSesison.commit();
+        sqlSesison.close();
     }
 }

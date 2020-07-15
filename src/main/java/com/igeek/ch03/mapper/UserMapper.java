@@ -23,4 +23,9 @@ public interface UserMapper {
 
     //插入用户信息
     public void insert(User user);
+
+    //更新用户信息
+    public void updateUser(User id);
+
+    public void deleteUser(Integer id);
 }
